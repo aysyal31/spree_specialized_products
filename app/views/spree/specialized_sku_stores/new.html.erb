@@ -1,0 +1,30 @@
+<h3>Add Specialized Sku Store </h3>
+
+<%= form_for @user_specialized_store do |f| %>
+
+ 
+
+<div class="form-group" data-hook="specialized_sku_store_id">
+
+  <%= f.field_container :specialized_sku_store do %>		
+    <%= f.label :specialized_sku_store_id, Spree.t(:specialized_sku_store) %>		
+    <%= f.collection_select(:specialized_sku_store_id, Spree::SpecializedSkuStore.all, :id, :specialized_store_name, { include_blank: 'None' }, { class: 'select2' }) %>		
+     <%#= f.error_message_on :supplier %>		
+  <% end %>
+ </div>
+
+
+   <%=text_field_tag :affiliated_seller_number, nil, placeholder: 'Enter your affiliated Seller Number' %>
+   <%= text_field_tag :pincode ,nil,placeholder: " Enter your pincode" %>
+
+
+     <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t(:create), 'save' %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%#= button_link_to Spree.t('actions.cancel'), spree.order_url(@order), icon: 'delete' %>
+    </div>
+
+
+<% end%>
+
+

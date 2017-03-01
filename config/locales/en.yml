@@ -2,4 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  spree:
+    specialized_sku_stores: "Specialized Sku Stores"
+    sku_stores_auths: "Sku Stores Authentication"
+    new_specialized_sku_store: " New Specialized Sku Store"

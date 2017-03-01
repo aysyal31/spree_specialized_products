@@ -1,5 +1,5 @@
   <%= f.field_container :specialized_sku_store do %>		
-     <%= f.label :specialized_sku_store_id, Spree.t(:specialized_sku_store) %>		
+    <%= f.label :specialized_sku_store_id, Spree.t(:specialized_sku_store) %>		
     <%= f.collection_select(:specialized_sku_store_id, Spree::SpecializedSkuStore.all, :id, :specialized_store_name, { include_blank: 'None' }, { class: 'select2' }) %>		
      <%#= f.error_message_on :supplier %>		
   <% end %>

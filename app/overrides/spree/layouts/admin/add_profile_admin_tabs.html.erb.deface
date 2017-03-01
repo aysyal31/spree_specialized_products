@@ -1,0 +1,7 @@
+<ul class="nav nav-sidebar">
+  <%= tab :specialized_sku_stores, label: Spree.t(:specialized_sku_stores), match_path: '/specialized_sku_stores', icon: 'home' %>
+</ul>
+
+<ul class="nav nav-sidebar">
+  <%= tab :sku_stores_auths, label: Spree.t(:sku_stores_auths), match_path: '/', icon: 'home' %>
+</ul>

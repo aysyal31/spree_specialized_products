@@ -1,17 +1,16 @@
-Spree.product_class.class_eval do
+Spree::Product.class_eval do
 
-  has_many :user_specialized_sku_stores
 
-  def allow_special_store?
-    self.allow_special_store.present?
-  end
+ belongs_to :specialized_sku_store
 
-  def update_allow_special_store
-   self.allow_special_store = true
-   self.save
-  end
+ def self.filter_products(user)
+ 	if user.present? && user.specialized_sku_stores.present?
+ 			where("specialized_sku_store_id is NULL OR specialized_sku_store_id in (?)", user.specialized_sku_stores.pluck(:id))
+ 	else
+ 		where(" specialized_sku_store_id is NULL")
+ 	end
 
-  
+ end
 
 
 

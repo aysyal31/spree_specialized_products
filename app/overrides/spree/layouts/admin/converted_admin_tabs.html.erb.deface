@@ -1,3 +1,0 @@
-<ul class="nav nav-sidebar">
-  <%= tab :specialized_sku_stores, label: :specialized_sku_stores, match_path: '/specialized_sku_stores', icon: 'home' %>
-</ul>

@@ -1,0 +1,18 @@
+<div data-hook="specialized_sku_store_details_wrapper" class="col-md-6">
+  <fieldset class="no-border-bottom">
+    <legend align="center" ><%= Spree.t('specialized_sku_store_details') %></legend>
+    <%= form.field_container :specialized_store_name, class: ['form-group'] do %>
+      <%= form.label :specialized_store_name, Spree::SpecializedSkuStore.human_attribute_name(:specialized_store_name) %>:<br />
+      <%= form.text_field :specialized_store_name, :class => 'form-control' %>
+    <% end %>
+    <% if spree_current_user.admin? %>
+
+      <%= form.field_container :is_active, class: ['form-group'] do %>
+        <div class="checkbox">
+        <%= label_tag :is_active do %>
+            <%= form.check_box :is_active %>
+            <%= Spree::SpecializedSkuStore.human_attribute_name(:is_active) %>
+        <% end %>
+        </div>
+      <% end %>
+    <% end %>

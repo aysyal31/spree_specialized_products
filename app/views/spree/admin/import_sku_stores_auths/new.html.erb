@@ -1,0 +1,64 @@
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t('back_to_specialized_sku_stores'), spree.admin_specialized_sku_stores_path, icon: 'arrow-left' %>
+<% end %>
+
+<% content_for :page_title do %>
+   <%= Spree.t('new_specialized_sku_store') %>
+<% end %>
+
+<%#= render 'spree/shared/error_messages', target: @object%>
+
+<h1>Drivers Import</h1>
+<hr>
+<p class="hidden">A CSV or Excel file can be used to import records. The first row should be the column name. The following columns are allowed.</p>
+
+<div class="row">
+  <div class="col-sm-3 hidden">
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th>Column Name</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Spree::SkuStoresAuth.columns.each do |column| %>
+          <% if column.name.in? [ *Spree::SkuStoresAuth.accessibles] %>
+            <tr>
+              <td><%= column.name %></td>
+              <td><%= column.type.to_s.titleize %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-sm-4 col-sm-offset-4 text-center">
+    <%= form_for(@import_store_auth ,:url => admin_import_sku_stores_auths_path(@import_store_auth)) do |f| %>
+      <% if @import_store_auth.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@import_store_auth.errors.count, "error") %> prohibited this import from completing:</h2>
+          <ul>
+          <% @import_store_auth.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%#= link_to "Download Excel Sheet Template",sample_export_trucker_trucks_path(format: "xlsx"),:class=>"btn btn-link"%>
+      <%#= link_to sample_export_trucker_trucks_path(format: "xlsx")  do %>
+      <div class="importViaExcel">
+        
+      </div>
+
+      <div class="form-group" style="margin-top: 2em;">
+      <label class="field">
+          <%= f.file_field :file,:class => "form-control floatlabel" %>
+          <!-- <span class="file-custom"></span> -->
+        </label>
+      </div>
+      <div style="margin-top: 2em;"><%= f.submit "Import Authentication File" %></div>
+    <% end %>
+  </div>
+</div>
+
