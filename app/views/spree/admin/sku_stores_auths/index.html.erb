@@ -1,9 +1,9 @@
 <% content_for :page_actions do %>
-  <%= button_link_to Spree.t('new_specialized_sku_store'), new_object_url, icon: 'add', class: 'btn-success' %>
+  <%= button_link_to Spree.t('import_authenticated_users_excel'), new_admin_import_sku_stores_auth_path, icon: 'add', class: 'btn-success' %>
 <% end %>
 
 <% content_for :page_title do %>
-  <%= Spree.t(:listing_specialized_sku_stores) %>
+  <%= Spree.t(:listing_uploaded_excel) %>
 <% end %>
 
 <% content_for :table_filter_title do %>
@@ -11,7 +11,7 @@
 <% end %>
 
 <% content_for :table_filter do %>
-  <div data-hook='admin_specialized_sku_stores_filter'>
+  <div data-hook='admin_sku_stores_auths_filter'>
 
   </div>
 <% end %>
@@ -20,24 +20,27 @@
 <%= render :partial => 'spree/admin/shared/index_table_options', :locals => { :collection => @collection } %>
 
 <% if @collection.any? %>
-  <table class="table" id="listing_specialized_sku_stores">
+  <table class="table" id="listing_sku_stores_auths">
     <thead>
-      <tr data-hook='admin_specialized_sku_stores_index_headers'>
-        <th><%= sort_link @search, :specialized_store_name,  Spree::SpecializedSkuStore.human_attribute_name(:specialized_store_name) %></th>
+      <tr data-hook='admin_sku_stores_auths_index_headers'>
+        <th><%= sort_link @search, :specialized_store_name,  Spree::SkuStoresAuth.human_attribute_name(:specialized_store_name) %></th>
         <th><%#= Spree.t(:users) %></th>
-        <th><%= sort_link @search, :active, Spree::SpecializedSkuStore.human_attribute_name(:is_active) %></th>
-        <th data-hook="admin_specialized_sku_stores_index_header_actions" class="actions"></th>
+        <th><%= sort_link @search, :active, Spree::SkuStoresAuth.human_attribute_name(:is_active) %></th>
+        <th data-hook="admin_sku_stores_auths_index_header_actions" class="actions"></th>
       </tr>
     </thead>
     <tbody>
     <%# Updated classes! %>
-      <%- @collection.each do |specialized_sku_store| %>
-        <tr <%#= "style='color: red;'" if specialized_sku_store.deleted? %> id="<%= spree_dom_id specialized_sku_store %>" data-hook="admin_specialized_sku_stores_index_rows" class="<%= cycle('odd', 'even') %>">
+      <%- @collection.each do |sku_stores_auth| %>
+        <tr <%#= "style='color: red;'" if sku_stores_auth.deleted? %> id="<%= spree_dom_id sku_stores_auth %>" data-hook="admin_sku_stores_auths_index_rows" class="<%= cycle('odd', 'even') %>">
           <!--todo: Fix this link!-->
-          <td><%= link_to specialized_sku_store.specialized_store_name, edit_object_url(specialized_sku_store) %></td>
-
-          <td><%= specialized_sku_store.is_active %></td>
-          <td class='actions actions-3' data-hook='admin_specialized_sku_stores_index_row_actions'>
+          <td><%= link_to sku_stores_auth.id, edit_object_url(sku_stores_auth) %></td>
+          <td><%= sku_stores_auth.seller_id %></td>
+          <td><%= sku_stores_auth.email %></td>
+          <td><%= sku_stores_auth.pincode %></td>
+          <td><%= sku_stores_auth.marketplace %></td>
+          <td><%= sku_stores_auth.is_active %></td>
+          <td class='actions actions-3' data-hook='admin_sku_stores_auths_index_row_actions'>
 
           </td>
         </tr>
@@ -45,9 +48,9 @@
     </tbody>
   </table>
 <% else %>
-  <%# New alert with link to add new specialized_sku_store %>
+  <%# New alert with link to add new sku_stores_auth %>
   <div class="alert alert-info no-objects-found">
-    <%= Spree.t(:no_resource_found, resource: Spree::SpecializedSkuStore.model_name.human(count: :many)) %>,
-    <%= link_to Spree.t(:add_one), spree.new_admin_specialized_sku_store_path %>!
+    <%= Spree.t(:no_resource_found, resource: Spree::SkuStoresAuth.model_name.human(count: :many)) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_sku_stores_auth_path %>!
   </div>
 <% end %>

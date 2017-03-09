@@ -37,7 +37,8 @@ class Spree::ImportSkuStoresAuth
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      store_auth = Spree::SkuStoresAuth.new
+      find_attributes = row.to_hash.slice(*Spree::SkuStoresAuth.find_accessibles)
+      store_auth = Spree::SkuStoresAuth.where(find_attributes).first_or_initialize
       store_auth.attributes = row.to_hash.slice(*Spree::SkuStoresAuth.accessibles)
       puts(store_auth)
       store_auth

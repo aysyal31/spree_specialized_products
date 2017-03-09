@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_specialized_products'
-  s.version     = '3.1.7'
+  s.version     = '3.1.8'
   s.summary     = 'Gem to add specialized_sku_stores'
   s.description = 'Adds store sttribute to sku'
   s.required_ruby_version = '>= 2.1.0'
